@@ -1,0 +1,19 @@
+[project]
+name = "radicle-natives"
+version = "0.0.1"
+description = "Automated integrations for operating Radicle Natives"
+authors = [
+    {name = "Anthony Shull"}
+]
+license = {text = "Free"}
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi (>=0.119.0,<0.120.0)",
+
+    "questdb (>=3.0.0,<4.0.0)",
+    "uvicorn (>=0.37.0,<0.38.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

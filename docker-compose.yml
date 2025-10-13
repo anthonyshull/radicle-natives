@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  questdb:
+    image: questdb/questdb:latest
+    ports:
+      - "9000:9000"   # Web Console
+      - "8812:8812"   # Postgres Wire Protocol
+      - "9009:9009"   # InfluxDB Line Protocol
+    networks:
+      radicle-natives:
+        ipv4_address: 10.0.0.2
+
+  radicle-natives:
+    build: .
+    ports:
+      - "8000:8000"   # Application Port
+    networks:
+      radicle-natives:
+        ipv4_address: 10.0.0.1
+
+networks:
+  radicle-natives:
+    driver: bridge
+    ipam:
+        config:
+            - subnet: 10.0.0.0/24
+              gateway: 10.0.0.254
