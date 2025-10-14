@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
-from surrealdb import Surreal
 
 app = FastAPI()
 
