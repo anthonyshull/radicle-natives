@@ -1,14 +1,4 @@
 services:
-  questdb:
-    image: questdb/questdb:latest
-    ports:
-      - "9000:9000"   # Web Console
-      - "8812:8812"   # Postgres Wire Protocol
-      - "9009:9009"   # InfluxDB Line Protocol
-    networks:
-      radicle-natives:
-        ipv4_address: 10.0.0.2
-
   radicle-natives:
     build: .
     ports:
@@ -16,6 +6,20 @@ services:
     networks:
       radicle-natives:
         ipv4_address: 10.0.0.1
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    ports:
+      - "8001:8000"   # SurrealDB HTTP/WebSocket API
+    entrypoint:
+      - /surreal
+      - start
+      - --user
+      - root
+      - --pass
+      - root
+    networks:
+      radicle-natives:
+        ipv4_address: 10.0.0.2
 
 networks:
   radicle-natives:

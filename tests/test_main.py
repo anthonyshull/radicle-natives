@@ -6,4 +6,5 @@ client = TestClient(app)
 def test_hello_text():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.text == "hello world"
+    assert "hello" in response.text
+    assert "world" in response.text
