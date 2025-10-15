@@ -39,5 +39,4 @@ jobs:
         run: poetry run ruff check .
 
       - name: Run tests
-        run: poetry run pytest --cov=main --cov-report=term-missing --cov-fail-under=99
-
+        run: poetry run pytest --cov=app --cov-report=term-missing --cov-fail-under=99

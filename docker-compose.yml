@@ -1,25 +1,24 @@
 services:
-  radicle-natives:
-    build: .
+  questdb:
+    image: questdb/questdb:latest
     ports:
-      - "8000:8000"   # Application Port
-    networks:
-      radicle-natives:
-        ipv4_address: 10.0.0.1
-  surrealdb:
-    image: surrealdb/surrealdb:latest
-    ports:
-      - "8001:8000"   # SurrealDB HTTP/WebSocket API
-    entrypoint:
-      - /surreal
-      - start
-      - --user
-      - root
-      - --pass
-      - root
+      - "9000:9000"
     networks:
       radicle-natives:
         ipv4_address: 10.0.0.2
+  radicle-natives:
+    build: .
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: curl --fail http://localhost:8000/_health || exit 1
+      interval: 30s
+      retries: 3
+      start_period: 15s
+      timeout: 1s
+    networks:
+      radicle-natives:
+        ipv4_address: 10.0.0.1
 
 networks:
   radicle-natives:

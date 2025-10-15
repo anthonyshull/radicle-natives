@@ -1,0 +1,5 @@
+[run]
+omit =
+    */tests/*
+    */app/db/*
+    */app/logger.py
